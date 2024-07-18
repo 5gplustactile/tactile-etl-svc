@@ -1,0 +1,197 @@
+#dbURI: "mongodb://{{ .Release.Name }}-mongodb/open5gs"
+
+populate:
+  enabled: true
+  # image:
+  #   registry: docker.io
+  #   repository: openverso/open5gs-dbctl
+  #   tag: 0.10.2
+  #   pullPolicy: IfNotPresent
+  initCommands: #[]
+  # example of initCommands:
+  - open5gs-dbctl add_ue_with_slice 999700000000001 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA internet 1 111111
+  - open5gs-dbctl add_ue_with_slice 999700000000002 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA internet 1 111111
+
+# Common
+mongodb:
+  enabled: false
+  auth:
+    enabled: false
+smf:
+  enabled: false
+  image:
+    tag: 2.7.0
+upf:
+  enabled: false
+  image:
+    tag: 2.7.0
+upf2:
+  enabled: false
+  image:
+    tag: 2.7.0
+webui:
+  enabled: false
+  image:
+    tag: 2.7.0
+
+# 4G
+hss:
+  enabled: false
+  image:
+    tag: 2.7.0
+  mongodb:
+    enabled: false
+mme:
+  enabled: false
+  image:
+    tag: 2.7.0
+pcrf:
+  enabled: false
+  image:
+    tag: 2.7.0
+  mongodb:
+    enabled: false
+
+smf:
+  config:
+    pcrf:
+      enabled: false
+
+sgwc:
+  enabled: false
+  image:
+    tag: 2.7.0
+sgwu:
+  enabled: false
+  image:
+    tag: 2.7.0
+
+# 5G
+amf:
+  enabled: false
+  image:
+    tag: 2.7.0
+ausf:
+  enabled: false
+  image:
+    tag: 2.7.0
+bsf:
+  enabled: fasle
+  image:
+    tag: 2.7.0
+nrf:
+  enabled: false
+  image:
+    tag: 2.7.0
+nssf:
+  enabled: false
+  image:
+    tag: 2.7.0
+pcf:
+  enabled: false
+  image:
+    tag: 2.7.0
+  mongodb:
+    enabled: false
+udm:
+  enabled: false
+  image:
+    tag: 2.7.0
+udr:
+  enabled: false
+  image:
+    tag: 2.7.0
+  mongodb:
+    enabled: false
+
+# Others
+
+# 5G
+amf:
+  config:
+    guamiList:
+      - plmn_id:
+          mcc: "999"
+          mnc: "70"
+        amf_id:
+          region: 2
+          set: 1
+    taiList:
+      - plmn_id:
+          mcc: "999"
+          mnc: "70"
+        tac: [1]
+    plmnList:
+      - plmn_id:
+          mcc: "999"
+          mnc: "70"
+        s_nssai:
+          - sst: 1
+            sd: "0x111111"
+
+upf:
+  config:
+    logLevel: info
+    # advertise: Provide custom UPF GTP-U address to be advertised inside NGAP messages
+    upf:
+      gtpu:
+        dev: ""
+    subnetList:
+      - subnet: 10.45.0.1/16
+        dnn: internet
+        dev: ogstun
+        createDev: true
+        enableNAT: true
+
+upf2:
+  config:
+    logLevel: info
+    # advertise: Provide custom UPF GTP-U address to be advertised inside NGAP messages
+    upf:
+      gtpu:
+        dev: ""
+    subnetList:
+      - subnet: 10.45.0.1/16
+        dnn: internet
+        dev: ogstun
+        createDev: true
+        enableNAT: true
+
+
+#    - dev: eth0
+#    client:
+#      upf:
+#      - address: {{ default (printf "%s-upf-pfcp" $open5gsName) .Values.config.upf.pfcp.hostname }}
+      
+
+
+     
+
+#   services:
+#     ngap:
+#       type: LoadBalancer
+#       loadBalancerIP: 10.11.90.121
+
+# upf:
+#   config:
+#     upf:
+#       gtpu:
+#         advertise: 10.11.90.122
+#   services:
+#     gtpu:
+#       type: LoadBalancer
+#       loadBalancerIP: 10.11.90.122
+
+
+nssf:
+  config:
+    nsiList:
+      - uri: ""
+        sst: 1
+        sd: "0x111111"
+
+webui:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostname: naaswebui.int
