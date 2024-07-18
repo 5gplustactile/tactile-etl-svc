@@ -8,6 +8,11 @@ import logging
 from datetime import timedelta
 #import mlflow
 
+
+import sys
+import os
+sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
+
 from naas_CoreMonitoring_dag import CoreMonitoring_dag
 
 

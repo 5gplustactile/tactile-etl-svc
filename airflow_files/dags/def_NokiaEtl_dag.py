@@ -8,12 +8,14 @@ import logging
 from datetime import timedelta
 #import mlflow
 
+import sys
+import os
+sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
+
 from naas_Nokia_etl_dag import nokia_etl_netperf5G
 from naas_Nokia_etl_dag import nokia_etl_netperf4G
 from naas_Nokia_etl_dag import nokia_etl_congestion5G
 from naas_Nokia_etl_dag import nokia_etl_congestion4G
-
-
 
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
