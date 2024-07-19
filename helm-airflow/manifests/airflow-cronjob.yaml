@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: airflow-cronjob-git-sync
+  namespace: airflow
+spec:
+  schedule: "*/10 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: git-sync-cronjob
+            image: ubuntu:24.10
+            args:
+            - /dags-folder/exec-cronjob.sh
+            volumeMounts:
+            - name: dags-volume
+              mountPath: "/dags-folder"
+          volumes:
+          - name: dags-volume
+            persistentVolumeClaim:
+              claimName: airflow-dags-pvc
+          restartPolicy: OnFailure

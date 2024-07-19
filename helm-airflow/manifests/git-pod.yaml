@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: git-cli
+  namespace: airflow
+spec:
+  containers:
+  - name: git-cli
+    image: ubuntu:24.10
+    command: ["sleep"]
+    args: ["infinity"]
+    volumeMounts:
+    - mountPath: "/dags-folder"
+      name: dags-volume
+  volumes:
+  - name: dags-volume
+    persistentVolumeClaim:
+      claimName: airflow-dags-pvc
+
