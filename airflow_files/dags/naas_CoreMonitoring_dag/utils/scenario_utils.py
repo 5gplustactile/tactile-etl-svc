@@ -2,7 +2,6 @@
 
 import logging 
 import requests  
-from bson.objectid import ObjectId
 import pymongo
 from pymongo import MongoClient
 import json

@@ -6,7 +6,6 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 import logging
 from datetime import timedelta
-#import mlflow
 
 import sys
 import os

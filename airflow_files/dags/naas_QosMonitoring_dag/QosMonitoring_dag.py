@@ -3,7 +3,6 @@
 """
 import logging 
 import requests  
-from bson.objectid import ObjectId
 import pymongo
 import os
 from pymongo import MongoClient
@@ -15,8 +14,6 @@ from pymongo.uri_parser import parse_uri
 import os
 from dotenv import load_dotenv
 import pandas as pd
-from github import Github
-from github import Auth
 
 from pandas import json_normalize
 
