@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exec-cronjob-configmap
+data:
+  exec-cronjob.sh: |
+   #!/bin/bash
+   
+   echo " @@@@ install dependencies"
+   apt update
+   apt install git -y
+   
+   cp -pr dags-folder/.ssh /root/
+   
+   echo "@@@@ git sync dags repo"
+   
+   cd dags-folder
+   
+   if [ -d "tactile-etl-svc" ]; then
+       cd tactile-etl-svc
+       git pull origin main
+   else
+       git clone git@github.com:5gplustactile/tactile-etl-svc.git
+       cd tactile-etl-svc
+   fi
+
