@@ -2,9 +2,8 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: airflow-cronjob-git-sync
-  namespace: airflow
 spec:
-  schedule: "*/10 * * * *"
+  schedule: {{ .Values.cronJob.schedule }}
   jobTemplate:
     spec:
       template:

@@ -28,6 +28,9 @@ serviceAccount:
 podAnnotations: {}
 podLabels: {}
 
+cronJob:
+  schedule: "*/10 * * * *"
+
 podSecurityContext: {}
   # fsGroup: 2000
 
