@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: airflow-cronjob-git-sync
+  name: cronjob-sync
 spec:
   schedule: {{ .Values.cronJob.schedule }}
   jobTemplate:
