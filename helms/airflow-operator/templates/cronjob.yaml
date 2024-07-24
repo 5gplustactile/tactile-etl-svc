@@ -12,14 +12,12 @@ spec:
           - name: git-sync-cronjob
             image: ubuntu:24.10
             args:
-            - cp /scripts/exec-cronjob.sh /opt/exec-cronjob.sh 
-            - chmod +x /opt/exec-cronjob.sh 
-            - ./opt/exec-cronjob.sh
+            - ls -lrt
             volumeMounts:
             - name: dags-volume
               mountPath: "/dags-folder"
             - name: exec-script
-              mountPath: /scripts/exec-cronjob.sh
+              mountPath: "/scripts/exec-cronjob.sh"
               subPath: exec-cronjob.sh
           volumes:
           - name: dags-volume
