@@ -14,12 +14,21 @@ spec:
             args:
             - cp /scripts/exec-cronjob.sh /opt/exec-cronjob.sh 
             - chmod +x /opt/exec-cronjob.sh 
-            - ./scripts/exec-cronjob.sh
+            - ./opt/exec-cronjob.sh
             volumeMounts:
             - name: dags-volume
               mountPath: "/dags-folder"
+            - name: exec-script
+              mountPath: /scripts/exec-cronjob.sh
+              subPath: exec-cronjob.sh
           volumes:
           - name: dags-volume
             persistentVolumeClaim:
               claimName: airflow-dags-pvc
+          - name: exec-script
+            configMap:
+              name: exec-cronjob-configmap
+              items:
+              - key: "exec-cronjob.sh"
+                path: "exec-cronjob.sh"
           restartPolicy: OnFailure
