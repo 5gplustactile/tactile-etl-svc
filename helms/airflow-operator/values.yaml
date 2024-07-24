@@ -8,7 +8,7 @@ image:
   repository: ubuntu
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 24.10"
+  tag: "24.10"
 
 imagePullSecrets: []
 nameOverride: ""
