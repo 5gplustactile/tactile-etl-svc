@@ -100,21 +100,21 @@ volumes:
  - name: dags-volume
    persistentVolumeClaim:
      claimName: airflow-dags-pvc
- - name: exec-script
-   configMap:
-     name: exec-cronjob-configmap
-     items:
-     - key: "exec-cronjob.sh"
-       path: "exec-cronjob.sh"
+# - name: exec-script
+#   configMap:
+#     name: exec-cronjob-configmap
+#     items:
+#     - key: "exec-cronjob.sh"
+#       path: "exec-cronjob.sh"
 
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
  - name: dags-volume
    mountPath: "/dags-folder"
- - name: exec-script
-   mountPath: /scripts/exec-cronjob.sh
-   subPath: exec-cronjob.sh
+# - name: exec-script
+#   mountPath: /scripts/exec-cronjob.sh
+#   subPath: exec-cronjob.sh
 
 
 nodeSelector: {}

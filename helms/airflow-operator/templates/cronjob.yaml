@@ -17,7 +17,7 @@ spec:
               ls -lrt
               cp /scripts/exec-cronjob.sh /opt/exec-cronjob.sh 
               chmod +x /opt/exec-cronjob.sh 
-              ./scripts/exec-cronjob.sh
+              ./opt/exec-cronjob.sh 
             volumeMounts:
             - name: dags-volume
               mountPath: "/dags-folder"
