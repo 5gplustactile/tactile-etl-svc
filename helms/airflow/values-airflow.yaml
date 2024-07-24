@@ -144,7 +144,7 @@ ingress:
   # Configs for the Ingress of the web Service
   web:
     # Enable web ingress resource
-    enabled: false
+    enabled: true
 
     # Annotations for the web Ingress
     annotations: {}
@@ -153,10 +153,10 @@ ingress:
     path: "/"
 
     # The pathType for the above path (used only with Kubernetes v1.19 and above)
-    pathType: "ImplementationSpecific"
+    pathType: "Prefix"
 
     # The hostname for the web Ingress (Deprecated - renamed to `ingress.web.hosts`)
-    host: ""
+    host: "airflow.tactile5g.int"
 
     # The hostnames or hosts configuration for the web Ingress
     hosts: []
@@ -170,7 +170,7 @@ ingress:
     #     secretName: ""
 
     # The Ingress Class for the web Ingress (used only with Kubernetes v1.19 and above)
-    ingressClassName: ""
+    ingressClassName: "nginx"
 
     # configs for web Ingress TLS (Deprecated - renamed to `ingress.web.hosts[*].tls`)
     tls:
@@ -272,9 +272,93 @@ executor: "CeleryExecutor"
 allowPodLaunching: true
 
 # Environment variables for all airflow containers
-env: []
 # - name: ""
 #   value: ""
+env:
+ - name: "GH_REPO"
+   value: "naas6g/naas6g-open5gs-cn"
+ - name: "GH_TOKEN"
+   value: "DUMMY"
+ - name: "CPU_THRESHOLD_RATE"
+   value: "0.1"
+ - name: "UPF_EXTENSION_THRESHOLD"
+   value: "6"
+ - name: "CPU_LOAD_DELTA_MIN"
+   value: "0"
+ - name: "CPU_LOAD_DELTA_MAX"
+   value: "0"
+ - name: "NF_LOAD_NO_USAGE"
+   value: "1.5"
+ - name: "DAG_PATH_CORE"
+   value: "opt/airflow/tactile-etl-svc/airflow_files/dags/naas_CoreMonitoring_dag"
+ - name: "DAG_PATH_QOS"
+   value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_QosMonitoring_dag"
+ - name: "DAG_PATH"
+   value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_CoreMonitoring_dag"
+ - name: "UTILS_PATH"
+   value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/_utils"
+ - name: "EVENT_INPUT_COREMETRIC_ANALYTICS_URL"
+   value: "http://192.168.100.5/events-core-analytics"
+ - name: "EVENT_INPUT_COREMETRIC_PREDICT_URL"
+   value: "http://192.168.100.5/events-core-predictions"
+ - name: "EVENT_INPUT_QOS_PREDICT_URL"
+   value: "http://192.168.100.5/events-devo-qos-predictions"
+ - name: "EVENT_INPUT_QOS_URL"
+   value: "http://192.168.100.5/events-devo-qos-analytics"
+ - name: "HOST_SVC_API"
+   value: "10.17.173.87"
+ - name: "HOST_WEB_API"
+   value: "10.17.173.87"
+ - name: "IP_SVC_API"
+   value: "5000"
+ - name: "IP_WEB_API"
+   value: "8000"
+ - name: "K8_FILTER_STR"
+   value: "open5gs"
+ - name: "PROM_QUERY"
+   value: "100*(rate(container_cpu_usage_seconds_total[2m]))"
+ - name: "PROM_URL"
+   value: "http://prometheus-dt.test.int"
+ - name: "MONGO_COL_4G_NETPERF"
+   value: "events4GNetPerf"
+ - name: "MONGO_COL_5G_NETPERF"
+   value: "events5GNetPerf"
+ - name: "MONGO_COL_5G_CONGESTION"
+   value: "events5GCongestion"
+ - name: "MONGO_COL_4G_CONGESTION"
+   value: "events4GCongestion"
+ - name: "MONGO_COL_COREMETRIC"
+   value: "eventsCoreAnalytics"
+ - name: "MONGO_COL_EVENTHUB"
+   value: "events"
+ - name: "MONGO_COL_QOS_TH"
+   value: "eventsQosAnalytics"
+ - name: "MONGO_DB_COREMETRIC"
+   value: "tactileDB"
+ - name: "MONGO_DB_EVENTHUB"
+   value: "tactileDB"
+ - name: "MONGO_DB_QOS_TH"
+   value: "tactileDB"
+ - name: "MONGO_HOST"
+   value: "192.168.100.5"
+ - name: "MONGO_HOST_PASS"
+   value: "example"
+ - name: "MONGO_HOST_PORT"
+   value: "27017"
+ - name: "MONGO_HOST_URL"
+   value: "192.168.100.5"
+ - name: "MONGO_HOST_USER"
+   value: "root"
+ - name: "MONGO_PORT"
+   value: "27018"
+ - name: "NWDAF_HOST"
+   value: "DUMMY"
+ - name: "NWDAF_PORT"
+   value: "8070"
+ - name: "NWDAF_STARTTS"
+   value: "2023-06-01T00:00:00.000Z"
+ - name: "ID_RSA_ROUTE"
+   value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_Nokia_etl_dag/certs/id_rsa"
 
 # Volumes for all airflow containers
 volumes: []
@@ -501,6 +585,20 @@ workers:
   args:
     - "bash"
     - "-c"
+    - |-
+      cat > r.txt << EOF
+      urllib3==1.26.3
+      pymongo==4.3.3
+      random-object-id==2.0.0
+      requests==2.27.1
+      PyGithub==2.1.1
+      termcolor==2.4.0
+      minio==7.2.4
+      statsmodels==0.14.2
+      python-dotenv==1.0.0
+      random-object-id==2.0.0
+      EOF
+      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
     # The format below is necessary to get `helm lint` happy
     - |-
       exec \
@@ -618,7 +716,7 @@ workers:
 
   persistence:
     # Enable persistent volumes
-    enabled: true
+    enabled: false
     # Volume size for worker StatefulSet
     size: 100Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
@@ -1469,7 +1567,16 @@ webserver:
     securityContexts:
       container: {}
 
-  env: []
+  env:
+   - name: AIRFLOW__API__AUTH_BACKEND
+     value: "airflow.api.auth.backend.basic_auth"
+   - name: AIRFLOW__API__ACCESS_CONTROL_ALLOW_HEADERS
+     value: "content-type, origin, authorization, accept"
+   - name: AIRFLOW__API__ACCESS_CONTROL_ALLOW_METHODS
+     value: "GET, POST, OPTIONS, DELETE"
+   - name: AIRFLOW__API__ACCESS_CONTROL_ALLOW_ORIGINS
+     value: "*"
+
 
 # Airflow Triggerer Config
 triggerer:
@@ -1531,7 +1638,7 @@ triggerer:
 
   persistence:
     # Enable persistent volumes
-    enabled: true
+    enabled: false
     # Volume size for triggerer StatefulSet
     size: 100Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
@@ -1816,7 +1923,7 @@ dagProcessor:
 flower:
   # Enable flower.
   # If True, and using CeleryExecutor/CeleryKubernetesExecutor, will deploy flower app.
-  enabled: false
+  enabled: true
 
   livenessProbe:
     initialDelaySeconds: 10
@@ -2429,8 +2536,8 @@ postgresql:
   auth:
     enablePostgresUser: true
     postgresPassword: postgres
-    username: ""
-    password: ""
+    username: "airflow"
+    password: "airflow"
 
 # Config settings to go into the mounted airflow.cfg
 #
@@ -2549,15 +2656,15 @@ dags:
     # Annotations for dags PVC
     annotations: {}
     # Enable persistent volume for storing dags
-    enabled: false
+    enabled: true
     # Volume size for dags
-    size: 1Gi
+    size: 2Gi
     # If using a custom storageClass, pass name here
-    storageClassName:
+    storageClassName: longhorn
     # access mode of the persistent volume
     accessMode: ReadWriteOnce
     ## the name of an existing PVC to use
-    existingClaim:
+    existingClaim: airflow-dags-pvc
     ## optional subpath for dag volume mount
     subPath: ~
   gitSync:
@@ -2566,17 +2673,17 @@ dags:
     # git repo clone url
     # ssh example: git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: https://github.com/apache/airflow.git
-    branch: v2-2-stable
+    repo: git@github.com:naas6g/naas6g-etl-svc.git
+    branch: main
     rev: HEAD
     # The git revision (branch, tag, or hash) to check out, v4 only
-    ref: v2-2-stable
+    ref: main
     depth: 1
     # the number of consecutive failures allowed before aborting
     maxFailures: 0
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "tests/dags"
+    subPath: "airflow_files/dags"
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---
@@ -2593,7 +2700,7 @@ dags:
     #     GITSYNC_PASSWORD: <base64_encoded_git_password>
     # and specify the name of the secret below
     #
-    # credentialsSecret: git-credentials
+    credentialsSecret: git-credentials
     #
     #
     # If you are using an ssh clone url, you can load
@@ -2607,14 +2714,15 @@ dags:
     #     # key needs to be gitSshKey
     #     gitSshKey: <base64_encoded_data>
     # and specify the name of the secret below
-    # sshKeySecret: airflow-ssh-secret
+    sshKeySecret: airflow-ssh-secret
     #
     # If you are using an ssh private key, you can additionally
     # specify the content of your known_hosts file, example:
     #
-    # knownHosts: |
-    #    <host1>,<ip1> <key1>
-    #    <host2>,<ip2> <key2>
+    knownHosts: |
+      |1|JkFDanFCY/vbAJ1jTDFEtZMAH08=|wLuIJiMvzb3EPBG7ilt8t5Nvqfc= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+      |1|mYwxRbHBlSfB1MXHx6DIBYoTVMs=|5oHwN0+JnZLgy7B125xfKwmfjwI= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
+      |1|Nid/U7RH0mYHAXx+ghLqUeiBNN4=|wwroBoJCoPbEbjnRqlB6QkTJ0G4= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
 
     # interval between git sync attempts in seconds
     # high values are more likely to cause DAGs to become out of sync between different components
@@ -2679,3 +2787,4 @@ logs:
     storageClassName:
     ## the name of an existing PVC to use
     existingClaim:
+

@@ -17,7 +17,8 @@ ssh-keygen –t rsa –b 4096
 cd /dags-folder
 git clone git@github.com:5gplustactile/tactile-etl-svc.git
 
-
+helm repo add apache-airflow https://airflow.apache.org
+helm repo update
 helm upgrade --install  -n airflow airflow --create-namespace  apache-airflow/airflow -f values-airflow.yaml
 
 # install the requirements in flower, scheduler, triggerer, webserver and worker pods
