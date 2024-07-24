@@ -11,6 +11,7 @@ data:
    apt install git -y
    
    cp -pr dags-folder/.ssh /root/
+   chmod 600 /root/.ssh/id_rsa
    
    echo "@@@@ git sync dags repo"
    
