@@ -581,7 +581,7 @@ workers:
 
   # Command to use when running Airflow workers (templated).
 #  command: ~
-  command: ["airflow", "worker"]
+  command: ["airflow", "celery", "worker"]
   # Args to use when running Airflow workers (templated).
   args:
 #    - "bash"
