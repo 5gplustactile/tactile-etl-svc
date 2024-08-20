@@ -1506,9 +1506,10 @@ webserver:
   webserverConfigConfigMapName: ~
 
   service:
-    type: ClusterIP
+    type: LoadBalancer
     ## service annotations
-    annotations: {}
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: 10.11.29.105
     ports:
       - name: airflow-ui
         port: "{{ .Values.ports.airflowUI }}"
