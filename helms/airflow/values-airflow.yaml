@@ -580,7 +580,8 @@ workers:
   revisionHistoryLimit: ~
 
   # Command to use when running Airflow workers (templated).
-  command: ~
+#  command: ~
+  command: ["airflow", "worker"]
   # Args to use when running Airflow workers (templated).
   args:
 #    - "bash"
@@ -600,8 +601,6 @@ workers:
 #      EOF
 #      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
     # The format below is necessary to get `helm lint` happy
-    - |-
-      airflow celery
 #    - |-
 #      exec \
 #      airflow {{ semverCompare ">=2.0.0" .Values.airflowVersion | ternary "celery worker" "worker" }}
