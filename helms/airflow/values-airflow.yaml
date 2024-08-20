@@ -359,8 +359,6 @@ env:
    value: "2023-06-01T00:00:00.000Z"
  - name: "ID_RSA_ROUTE"
    value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_Nokia_etl_dag/certs/id_rsa"
- - name: AIRFLOW__CELERY__BROKER_URL
-   value: "redis://:redisexample@airflow-redis:6379/"
 
 # Volumes for all airflow containers
 volumes: []
