@@ -599,6 +599,7 @@ workers:
 #      random-object-id==2.0.0
 #      EOF
 #      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
+    -  celery worker
     # The format below is necessary to get `helm lint` happy
 #    - |-
 #      exec \
