@@ -318,7 +318,7 @@ env:
  - name: "PROM_QUERY"
    value: "100*(rate(container_cpu_usage_seconds_total[2m]))"
  - name: "PROM_URL"
-   value: "http://prometheus-dt.test.int"
+   value: "http://prometheus.prometheus-system.svc.cluster.local"
  - name: "MONGO_COL_4G_NETPERF"
    value: "events4GNetPerf"
  - name: "MONGO_COL_5G_NETPERF"
