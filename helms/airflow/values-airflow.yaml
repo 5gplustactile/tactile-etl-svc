@@ -2420,7 +2420,8 @@ redis:
 # Auth secret for a private registry
 # This is used if pulling airflow images from a private registry
 registry:
-  secretName: ~
+  secretName:
+    - name: harbor-secret
 
   # Example:
   # connection:
