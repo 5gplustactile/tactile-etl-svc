@@ -361,6 +361,8 @@ env:
    value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_Nokia_etl_dag/certs/id_rsa"
  - name: "AIRFLOW__CELERY__BROKER_URL"
    value: "redis://:HyVBN5YU1c@airflow-redis:6379/0"  #to get the redis pwd (kubectl -n airflow exec -it NAME_POD_REDIS -- printenv | grep REDIS_PASSWORD)
+ - name: AIRFLOW__LOGGING__BASE_LOG_FOLDER
+   value: "/opt/airflow/logs"
 
 # Volumes for all airflow containers
 volumes: []
