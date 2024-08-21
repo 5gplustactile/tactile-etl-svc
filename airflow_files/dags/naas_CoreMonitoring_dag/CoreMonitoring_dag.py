@@ -46,7 +46,7 @@ def run_get_prometheus_metrics():
     str_container_filter_tag = os.getenv('K8_FILTER_STR')
 
     # get prometheus data
-    post_query_url = os.getenv('PROM_URL') + '/api/v1/query?query=' + os.getenv('PROM_QUERY')
+    post_query_url = os.getenv('PROM_URL') + ':' + os.getenv('PROM_PORT') + '/api/v1/query?query=' + os.getenv('PROM_QUERY')
     logger.info('Get prometheus data...', post_query_url)
     response = requests.post(post_query_url)
     prometheus_data = json.loads(response.text)
