@@ -2433,7 +2433,7 @@ registry:
 # Elasticsearch logging configuration
 elasticsearch:
   # Enable elasticsearch task logging
-  enabled: false
+  enabled: true
   # A secret containing the connection
   secretName: ~
   # Or an object representing the connection
