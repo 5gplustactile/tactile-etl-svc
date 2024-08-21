@@ -360,7 +360,7 @@ env:
  - name: "ID_RSA_ROUTE"
    value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_Nokia_etl_dag/certs/id_rsa"
  - name: "AIRFLOW__CELERY__BROKER_URL"
-   value: "redis://:LI0Cv9gGgR@airflow-redis:6379/0"
+   value: "redis://:LI0Cv9gGgR@airflow-redis:6379/0"  #to get the redis pwd (kubectl -n airflow exec -it NAME_POD_REDIS -- printenv | grep REDIS_PASSWORD)
 
 # Volumes for all airflow containers
 volumes: []
@@ -586,22 +586,22 @@ workers:
   command: ["airflow", "celery", "worker"]
   # Args to use when running Airflow workers (templated).
   args:
-#    - "bash"
-#    - "-c"
-#    - |-
-#      cat > r.txt << EOF
-#      urllib3==1.26.3
-#      pymongo==4.3.3
-#      random-object-id==2.0.0
-#      requests==2.27.1
-#      PyGithub==2.1.1
-#      termcolor==2.4.0
-#      minio==7.2.4
-#      statsmodels==0.14.2
-#      python-dotenv==1.0.0
-#      random-object-id==2.0.0
-#      EOF
-#      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
+    - "bash"
+    - "-c"
+    - |-
+      cat > r.txt << EOF
+      urllib3==1.26.3
+      pymongo==4.3.3
+      random-object-id==2.0.0
+      requests==2.27.1
+      PyGithub==2.1.1
+      termcolor==2.4.0
+      minio==7.2.4
+      statsmodels==0.14.2
+      python-dotenv==1.0.0
+      random-object-id==2.0.0
+      EOF
+      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
     # The format below is necessary to get `helm lint` happy
 #    - |-
 #      exec \
