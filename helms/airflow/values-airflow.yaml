@@ -590,7 +590,8 @@ workers:
     - "-c"
     - |-
       cat > r.txt << EOF
-      urllib3==1.26.3
+      #urllib3==1.26.3
+      urllib3
       pymongo==4.3.3
       random-object-id==2.0.0
       requests==2.27.1
