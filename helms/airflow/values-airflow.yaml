@@ -2567,7 +2567,8 @@ config:
     colored_console_log: 'False'
     remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
   logging:
-    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
+#    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
+    remote_loggin: 'False'
     colored_console_log: 'False'
   metrics:
     statsd_on: '{{ ternary "True" "False" .Values.statsd.enabled }}'
