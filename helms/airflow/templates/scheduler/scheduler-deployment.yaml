@@ -143,7 +143,7 @@ spec:
         - name: wait-for-airflow-migrations
           resources: {{- toYaml .Values.scheduler.resources | nindent 12 }}
           image: dockerhub.mobilesandbox.cloud:9443/tactile5g/airflow:2.9.2
-          imagePullPolicy: {{ .Values.images.airflow.pullPolicy }}
+          imagePullPolicy: Always
           securityContext: {{ $containerSecurityContextWaitForMigrations | nindent 12 }}
           volumeMounts:
             {{- include "airflow_config_mount" . | nindent 12 }}
@@ -175,7 +175,7 @@ spec:
         # Always run the main scheduler container.
         - name: scheduler
           image: dockerhub.mobilesandbox.cloud:9443/tactile5g/airflow_worker:2.9.2
-          imagePullPolicy: {{ .Values.images.airflow.pullPolicy }}
+          imagePullPolicy: Always
           securityContext: {{ $containerSecurityContext | nindent 12 }}
           {{- if $containerLifecycleHooks }}
           lifecycle: {{- tpl (toYaml $containerLifecycleHooks) . | nindent 12 }}
