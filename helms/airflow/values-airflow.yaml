@@ -2570,6 +2570,7 @@ config:
 #    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
     remote_loggin: 'False'
     colored_console_log: 'False'
+    base_log_folder: /opt/airflow/logs
   metrics:
     statsd_on: '{{ ternary "True" "False" .Values.statsd.enabled }}'
     statsd_port: 9125
