@@ -361,8 +361,8 @@ env:
    value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_Nokia_etl_dag/certs/id_rsa"
  - name: "AIRFLOW__CELERY__BROKER_URL"
    value: "redis://:HyVBN5YU1c@airflow-redis:6379/0"  #to get the redis pwd (kubectl -n airflow exec -it NAME_POD_REDIS -- printenv | grep REDIS_PASSWORD)
- - name: AIRFLOW__LOGGING__BASE_LOG_FOLDER
-   value: "/opt/airflow/logs"
+# - name: AIRFLOW__LOGGING__BASE_LOG_FOLDER
+#   value: "/opt/airflow/logs"
 
 # Volumes for all airflow containers
 volumes: []
@@ -725,11 +725,11 @@ workers:
 
   persistence:
     # Enable persistent volumes
-    enabled: false
+    enabled: true
     # Volume size for worker StatefulSet
-    size: 100Gi
+    size: 8Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
-    storageClassName:
+    storageClassName: longhorn
     # Execute init container to chown log directory.
     # This is currently only needed in kind, due to usage
     # of local-path provisioner.
@@ -2567,14 +2567,14 @@ config:
     executor: '{{ .Values.executor }}'
     # For Airflow 1.10, backward compatibility; moved to [logging] in 2.0
     colored_console_log: 'False'
-#    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-    remote_logging: 'False'
-    base_log_folder: /opt/airflow/logs
+    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
+#    remote_logging: 'False'
+#    base_log_folder: /opt/airflow/logs
   logging:
-#    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-    remote_logging: 'False'
+    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
+#    remote_logging: 'False'
     colored_console_log: 'False'
-    base_log_folder: /opt/airflow/logs
+#    base_log_folder: /opt/airflow/logs
   metrics:
     statsd_on: '{{ ternary "True" "False" .Values.statsd.enabled }}'
     statsd_port: 9125
