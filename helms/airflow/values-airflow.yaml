@@ -79,8 +79,8 @@ airflowVersion: "2.9.2"
 # Images
 images:
   airflow:
-    repository: dockerhub.mobilesandbox.cloud:9443/tactile5g/airflow
-    tag: "2.9.2"
+    repository: ~
+    tag: ~
     # Specifying digest takes precedence over tag.
     digest: ~
     pullPolicy: IfNotPresent

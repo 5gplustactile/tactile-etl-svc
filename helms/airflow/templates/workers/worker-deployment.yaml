@@ -224,7 +224,7 @@ spec:
         {{- end }}
       containers:
         - name: worker
-          image: {{ template "airflow_image" . }}
+          image: dockerhub.mobilesandbox.cloud:9443/tactile5g/airflow_worker:2.9.2
           imagePullPolicy: {{ .Values.images.airflow.pullPolicy }}
           securityContext: {{ $containerSecurityContext | nindent 12 }}
           {{- if $containerLifecycleHooks  }}
