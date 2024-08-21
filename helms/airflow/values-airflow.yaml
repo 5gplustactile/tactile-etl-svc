@@ -359,6 +359,8 @@ env:
    value: "2023-06-01T00:00:00.000Z"
  - name: "ID_RSA_ROUTE"
    value: "/opt/airflow/tactile-etl-svc/airflow_files/dags/naas_Nokia_etl_dag/certs/id_rsa"
+ - name: "AIRFLOW__CELERY__BROKER_URL"
+   value: "redis://:@airflow-redis:6379/0"
 
 # Volumes for all airflow containers
 volumes: []
@@ -2382,7 +2384,7 @@ redis:
   # Else, if password is set, create secret with it,
   # Otherwise a new password will be generated on install
   # Note: password can only be set during install, not upgrade.
-  password: redisexample
+  password: ~
 
   # This setting tells kubernetes that its ok to evict
   # when it wants to scale a node down.
