@@ -582,30 +582,30 @@ workers:
   revisionHistoryLimit: ~
 
   # Command to use when running Airflow workers (templated).
-  command: ~
-#  command: ["airflow", "celery", "worker"]
+#  command: ~
+  command: ["airflow", "celery", "worker"]
   # Args to use when running Airflow workers (templated).
   args:
-    - "bash"
-    - "-c"
-    - |-
-      cat > r.txt << EOF
-      #urllib3==1.26.3
-      urllib3
-      pymongo==4.3.3
-      random-object-id==2.0.0
-      requests==2.27.1
-      PyGithub==2.1.1
-      termcolor==2.4.0
-      minio==7.2.4
-      statsmodels==0.14.2
-      python-dotenv==1.0.0
-      random-object-id==2.0.0
-      EOF
-      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
-      pip3 install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
-
-      airflow celery worker
+#    - "bash"
+#    - "-c"
+#    - |-
+#      cat > r.txt << EOF
+#      #urllib3==1.26.3
+#      urllib3
+#      pymongo==4.3.3
+#      random-object-id==2.0.0
+#      requests==2.27.1
+#      PyGithub==2.1.1
+#      termcolor==2.4.0
+#      minio==7.2.4
+#      statsmodels==0.14.2
+#      python-dotenv==1.0.0
+#      random-object-id==2.0.0
+#      EOF
+#      pip install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
+#      pip3 install --no-cache-dir "apache-airflow==${AIRFLOW_VERSION}" -r r.txt
+#
+#      airflow celery worker
     # The format below is necessary to get `helm lint` happy
 #    - |-
 #      exec \
