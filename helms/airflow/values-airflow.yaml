@@ -2567,10 +2567,12 @@ config:
     executor: '{{ .Values.executor }}'
     # For Airflow 1.10, backward compatibility; moved to [logging] in 2.0
     colored_console_log: 'False'
-    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
+#    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
+    remote_logging: 'False'
+    base_log_folder: /opt/airflow/logs
   logging:
 #    remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-    remote_loggin: 'False'
+    remote_logging: 'False'
     colored_console_log: 'False'
     base_log_folder: /opt/airflow/logs
   metrics:
