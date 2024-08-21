@@ -1,8 +1,11 @@
 Airflow Manual Process
 -----------------------
 
-
 ```
+###################################################################
+NOTA: This process was replaced with airflow-operator created by us.
+###################################################################
+
 k apply -f git-pvc.yaml
 k apply -f git-pod.yaml
 k appy -f airflow-cronjob.yaml
@@ -21,9 +24,16 @@ helm repo add apache-airflow https://airflow.apache.org
 helm repo update
 helm upgrade --install  -n airflow airflow --create-namespace  apache-airflow/airflow -f values-airflow.yaml
 
+#######################################################################################
+NOTA: This process was replaced creating a new image (docker/Dockerfile folder).
+Push the image in internal registry. The values-airflow.yaml file was modified 
+including the internal registry paremeters and modified both deployments scheduler and
+workes
+#######################################################################################
+
 # install the requirements in flower, scheduler, triggerer, webserver and worker pods
 cat > r.txt << EOF
-urllib3==1.26.3
+urllib3==1.26.5
 pymongo==4.3.3
 random-object-id==2.0.0
 requests==2.27.1
