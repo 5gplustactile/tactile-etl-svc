@@ -193,8 +193,8 @@ spec:
         {{- if .Values.workers.waitForMigrations.enabled }}
         - name: wait-for-airflow-migrations
           resources: {{- toYaml .Values.workers.resources | nindent 12 }}
-          image: {{ template "airflow_image_for_migrations" . }}
-          imagePullPolicy: {{ .Values.images.airflow.pullPolicy }}
+          image: dockerhub.mobilesandbox.cloud:9443/tactile5g/airflow_worker:2.9.2
+          imagePullPolicy: Always
           securityContext: {{ $containerSecurityContextWaitForMigrations | nindent 12 }}
           volumeMounts:
             {{- include "airflow_config_mount" . | nindent 12 }}
