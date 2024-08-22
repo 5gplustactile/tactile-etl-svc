@@ -26,10 +26,11 @@ def repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branc
     dag_file= local_path
     
     try:
+        print('Open following file: ', dag_file)
         with open(dag_file, 'r') as file:
             content = file.read()
     except:
-        print(dag_file)
+        print('Exception: ', dag_file)
         print('File not available.')
 
     print('Path from repository for file git path... %s ' % git_path)
