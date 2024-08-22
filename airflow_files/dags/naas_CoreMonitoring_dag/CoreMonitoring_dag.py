@@ -345,7 +345,7 @@ def run_trainAndPredict():
     df_all = pd.concat([df_renamed, df_predicciones_agregadas])
        
     DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/data/core_nfload_predict.csv'
-    df_predicciones_agregadas.to_csv('/tmp/core_nfload_predict.csv)
+    df_predicciones_agregadas.to_csv('/tmp/core_nfload_predict.csv')
 
 # TASK
 def run_send_core_predictions():
