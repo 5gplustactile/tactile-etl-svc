@@ -25,6 +25,10 @@ def repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branc
     print('Path from dag for file')
     dag_file= local_path
 
+    # Mostrar el path de ejecución actual
+    current_path = os.getcwd()
+    print("El código se está ejecutando en el siguiente path:", current_path)
+
     # Mostrar todos los ficheros en el directorio
     print("Listado de ficheros en el directorio actual:")
     for root, dirs, files in os.walk(os.path.dirname(dag_file)):
