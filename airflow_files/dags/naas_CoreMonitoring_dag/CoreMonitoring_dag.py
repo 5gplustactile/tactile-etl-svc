@@ -266,6 +266,10 @@ def run_CoreMetric_computation():
     print('Unique cells: ', dfTh['core_category'].unique())
     DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/core_nfload_data.csv'
     print(DAG_PATH_DATA)
+    # Get the current working directory
+    current_directory = os.getcwd()
+    # Print the current working directory
+    print(f"Current working directory: {current_directory}")
     dfTh.to_csv(DAG_PATH_DATA)
     print('Saved metric data.')
 
