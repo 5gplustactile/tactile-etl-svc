@@ -270,7 +270,7 @@ def run_CoreMetric_computation():
     current_directory = os.getcwd()
     # Print the current working directory
     print(f"Current working directory: {current_directory}")
-    dfTh.to_csv(DAG_PATH_DATA)
+    dfTh.to_csv('/tmp/core_nfload_data.csv')
     print('Saved metric data.')
 
 # TASK
@@ -285,7 +285,9 @@ def run_trainAndPredict():
     from statsmodels.tsa.arima.model import ARIMA
 
     DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/core_nfload_data.csv'
-    df = pd.read_csv(DAG_PATH_DATA, index_col=0)
+    #df = pd.read_csv(DAG_PATH_DATA, index_col=0)
+    df = pd.read_csv('/tmp/core_nfload_data.csv')
+
 
     print(df.head(4))
 
