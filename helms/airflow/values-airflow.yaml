@@ -278,7 +278,7 @@ env:
  - name: "GH_REPO"
    value: "naas6g/naas6g-open5gs-cn"
  - name: "GH_TOKEN"
-   value: "DUMMY"
+   value: "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"
  - name: "CPU_THRESHOLD_RATE"
    value: "0.1"
  - name: "UPF_EXTENSION_THRESHOLD"
