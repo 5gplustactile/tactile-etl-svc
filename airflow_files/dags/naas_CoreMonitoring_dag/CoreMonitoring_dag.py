@@ -264,7 +264,7 @@ def run_CoreMetric_computation():
     print('dfTh:', dfTh)
 
     print('Unique cells: ', dfTh['core_category'].unique())
-    DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/data/core_nfload_data.csv'
+    DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/core_nfload_data.csv'
     #dfTh.to_csv(DAG_PATH_DATA)
 
 # TASK
@@ -278,7 +278,7 @@ def run_trainAndPredict():
     import pandas as pd
     from statsmodels.tsa.arima.model import ARIMA
 
-    DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/data/core_nfload_data.csv'
+    DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/core_nfload_data.csv'
     df = pd.read_csv(DAG_PATH_DATA, index_col=0)
 
     print(df.head(4))
