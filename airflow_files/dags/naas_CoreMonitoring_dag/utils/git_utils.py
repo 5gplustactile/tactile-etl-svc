@@ -26,12 +26,29 @@ def repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branc
     dag_file= local_path
     
     try:
+        print('Attempting to open file at path:', dag_file)
+
+        if os.path.exists(dag_file):
+            if os.access(dag_file, os.R_OK):
+                try:
+                    with open(dag_file, 'r') as file:
+                        content = file.read()
+                except Exception as e:
+                    print('Exception occurred while trying to open the file:', dag_file)
+                    print('Error details:', str(e))
+            else:
+                print('File exists but is not readable:', dag_file)
+        else:
+            print('File does not exist:', dag_file) 
+            
+
         print('Open following file: ', dag_file)
         with open(dag_file, 'r') as file:
             content = file.read()
     except:
-        print('Exception: ', dag_file)
-        print('File not available.')
+        print('Exception occurred while trying to open the file:', dag_file)
+        print('Error details:', str(e))
+
 
     print('Path from repository for file git path... %s ' % git_path)
     git_file = git_path
