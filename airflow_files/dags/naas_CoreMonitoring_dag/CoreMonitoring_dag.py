@@ -260,7 +260,7 @@ def run_CoreMetric_computation():
             timestamp_th = datetime.strptime(row['data']['timestamp'][cat], '%Y-%m-%d %H:%M:%S.%f')
             core_value = row['data']['metric.value'][cat]
                 
-            dfTh = dfTh.append({'datetime': timestamp_th, 'core_category': cat, 'value': core_value}, ignore_index=True)
+            dfTh = dfTh._append({'datetime': timestamp_th, 'core_category': cat, 'value': core_value}, ignore_index=True)
     print('dfTh:', dfTh)
 
     print('Unique cells: ', dfTh['core_category'].unique())
