@@ -30,7 +30,7 @@ def repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branc
     for root, dirs, files in os.walk(os.path.dirname(dag_file)):
         for filename in files:
             file_path = os.path.join(root, filename)
-            print(file_path)
+            print('Filename: ', file_path)
     
     try:
         print('Attempting to open file at path:', dag_file)
@@ -40,7 +40,7 @@ def repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branc
                 try:
                     with open(dag_file, 'r') as file:
                         content = file.read()
-                except Exception as e:
+                except:
                     print('Exception occurred while trying to open the file:', dag_file)
             else:
                 print('File exists but is not readable:', dag_file)
