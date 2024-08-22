@@ -265,7 +265,7 @@ def run_CoreMetric_computation():
 
     print('Unique cells: ', dfTh['core_category'].unique())
     DAG_PATH_DATA = os.getenv('DAG_PATH_CORE') + '/core_nfload_data.csv'
-    #dfTh.to_csv(DAG_PATH_DATA)
+    dfTh.to_csv(DAG_PATH_DATA)
 
 # TASK
 def run_trainAndPredict():
