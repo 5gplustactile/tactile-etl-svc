@@ -44,7 +44,7 @@ def handle_def_ext(gh_token,gh_reponame,DAG_PATH):
     local_path = DAG_PATH + '/config-open5gs/scenario-custom-upf1dnn1-upf2dnn1/chart-smf/smf.yaml'
     git_path = '/open5gs/charts/open5gs-smf/resources/config/smf.yaml'
     entity = 'smf'
-    git_branch = 'openverso'
+    git_branch = 'main'
     repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branch, new_sce)
 
     # Update SMF Values 
@@ -52,7 +52,7 @@ def handle_def_ext(gh_token,gh_reponame,DAG_PATH):
     local_path = DAG_PATH + '/config-open5gs/scenario-custom-upf1dnn1-upf2dnn1/chart-smf/values.yaml'
     git_path = '/open5gs/charts/open5gs-smf/values.yaml'
     entity = 'values'
-    git_branch = 'openverso'
+    git_branch = 'main'
     repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branch, new_sce)
 
     # Update 1UPF 
@@ -60,7 +60,7 @@ def handle_def_ext(gh_token,gh_reponame,DAG_PATH):
     local_path = DAG_PATH + '/config-open5gs/scenario-custom-upf1dnn1-upf2dnn1/default-values.yaml'
     git_path = '/values/main-values/default-values.yaml'
     entity = 'default-values'
-    git_branch = 'openverso'
+    git_branch = 'main'
     repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branch, new_sce)
 
     data = {"svcid":"1", "status":"active-airflow"}
@@ -95,7 +95,7 @@ def handle_ext_def(gh_token,gh_reponame, DAG_PATH,nfCpuUsageUpf1, nfCpuUsageUpf2
     local_path = DAG_PATH + '/config-open5gs/scenario-default/chart-smf/smf.yaml'
     git_path = '/open5gs/charts/open5gs-smf/resources/config/smf.yaml'
     entity = 'smf'
-    git_branch = 'openverso'
+    git_branch = 'main'
     repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branch, new_sce)           
 
     # Reconfigure SMF to Block admitting traffic to UPF2
@@ -103,7 +103,7 @@ def handle_ext_def(gh_token,gh_reponame, DAG_PATH,nfCpuUsageUpf1, nfCpuUsageUpf2
     local_path = DAG_PATH + '/config-open5gs/scenario-default/chart-smf/values.yaml'
     git_path = '/open5gs/charts/open5gs-smf/values.yaml'
     entity = 'values'
-    git_branch = 'openverso'
+    git_branch = 'main'
     repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branch, new_sce)
 
     
@@ -116,7 +116,7 @@ def handle_ext_def(gh_token,gh_reponame, DAG_PATH,nfCpuUsageUpf1, nfCpuUsageUpf2
         local_path = DAG_PATH + '/config-open5gs/scenario-default/default-values.yaml'
         git_path = '/values/main-values/default-values.yaml'
         entity = 'default-values'
-        git_branch = 'openverso'
+        git_branch = 'main'
         repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branch, new_sce)
     else:
         print('Additional UPF can not be undeploy because still has traffic routing...')
