@@ -344,7 +344,7 @@ env:
  - name: "MONGO_HOST_USER"
    value: "root"
  - name: "MONGO_PORT"
-   value: "27018"
+   value: "27017"
  - name: "NWDAF_HOST"
    value: "DUMMY"
  - name: "NWDAF_PORT"
