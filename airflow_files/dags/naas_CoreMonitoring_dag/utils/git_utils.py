@@ -57,7 +57,6 @@ def repo_sync_file(gh_token,gh_reponame, entity, local_path, git_path, git_branc
             content = file.read()
     except:
         print('Exception occurred while trying to open the file:', dag_file)
-        print('Error details:', str(e))
 
 
     print('Path from repository for file git path... %s ' % git_path)
