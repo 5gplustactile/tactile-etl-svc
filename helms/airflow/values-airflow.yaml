@@ -346,7 +346,7 @@ env:
  - name: "MONGO_PORT"
    value: "27017"
  - name: "NWDAF_HOST"
-   value: "nwdaf-netapi-analytics-info.nwdaf-netapi"
+   value: "nwdaf-netapi.nwdaf-netapi-analytics-info.svc.cluster.local"
  - name: "NWDAF_PORT"
    value: "8080"
  - name: "NWDAF_STARTTS"
