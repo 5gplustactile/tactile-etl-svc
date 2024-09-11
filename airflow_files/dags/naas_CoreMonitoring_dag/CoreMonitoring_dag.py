@@ -144,7 +144,7 @@ def run_sendToGit():
     current_iso_timestamp = current_timestamp.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     print(current_iso_timestamp)
 
-    mongo_uri = "mongodb://" + os.getenv('MONGO_HOST_USER') + ":" + os.getenv('MONGO_HOST_PASS') + "@" + os.getenv('MONGO_HOST_PASS') + "MONGO_HOST" + ":" + os.getenv('MONGO_HOST_PORT') + "/"
+    mongo_uri = "mongodb://" + os.getenv('MONGO_HOST_USER') + ":" + os.getenv('MONGO_HOST_PASS') + "@" + os.getenv('MONGO_HOST_URL') + ":" + os.getenv('MONGO_HOST_PORT') + "/"
     client = pymongo.MongoClient(mongo_uri)
     gh_token = os.getenv('GH_TOKEN')
     gh_reponame = os.getenv('GH_REPO')
