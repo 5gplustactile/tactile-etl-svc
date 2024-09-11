@@ -348,7 +348,7 @@ env:
  - name: "NWDAF_HOST"
    value: "nwdaf-netapi-analytics-info.nwdaf-netapi"
  - name: "NWDAF_PORT"
-   value: "8070"
+   value: "8080"
  - name: "NWDAF_STARTTS"
    value: "2023-06-01T00:00:00.000Z"
  - name: "ID_RSA_ROUTE"
