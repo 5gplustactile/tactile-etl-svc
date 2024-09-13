@@ -282,7 +282,7 @@ env:
  - name: "CPU_THRESHOLD_RATE"
    value: "0.1"
  - name: "UPF_EXTENSION_THRESHOLD"
-   value: "6"
+   value: "3"
  - name: "CPU_LOAD_DELTA_MIN"
    value: "0"
  - name: "CPU_LOAD_DELTA_MAX"
